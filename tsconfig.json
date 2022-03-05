@@ -13,8 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~utils/*": ["utils/*"],
+      "~components/*": ["components/*"],
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Context/MainDataContext.js", "src/components/Header/Header.js", "src/components/NextBindings/Next.js", "src/components/Table/Table.js", "src/components/App.js"],
+  "exclude": ["node_modules"],
 }
