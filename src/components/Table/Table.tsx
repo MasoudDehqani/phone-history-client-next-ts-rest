@@ -5,12 +5,12 @@ import type { PhoneType } from "~utils/types"
 
 export default function Table({ phones, dispatch } : { phones: PhoneType[], dispatch: Dispatch<any> }) {
 
-  // const { dispatch } = usePhoneContext()
+  // handleAddPhone = () => {
+
+  // }
 
   const handleDeletePhone = (id: string) => {
     return async () => {
-      console.log(id)
-      console.log(JSON.stringify({ id }))
       try {
         const response = await fetch('http://localhost:5001/api/v1/phones', {
           method: "DELETE",
@@ -29,31 +29,7 @@ export default function Table({ phones, dispatch } : { phones: PhoneType[], disp
     }
   }
 
-  // useEffect(() => {
-  //   handleDeletePhone()
-  // }, [])
-
   const mapPhonesToTableRows = ({ id, brand, model, price_range } : PhoneType) => {
-
-    // let handleDeleteData = () => {
-    //   setMainData(prev => prev |> Js.Array.filter((ph) => ph.id !== id))
-    // }
-
-    // let priceRangeSymbol = switch price_range {
-    //   | #1 => "$"
-    //   | #2 => "$$"
-    //   | #3 => "$$$"
-    //   | #4 => "$$$$"
-    //   | #5 => "$$$$$"
-    // }
-
-    // let priceRangeString = switch price_range {
-    //   | #1 => "1"
-    //   | #2 => "2"
-    //   | #3 => "3"
-    //   | #4 => "4"
-    //   | #5 => "5"
-    // }
 
     const tdClassName = "border text-center px-8 py-4"
     const priceRangeSymbol = "$"
@@ -76,7 +52,7 @@ export default function Table({ phones, dispatch } : { phones: PhoneType[], disp
           </Link>
         </td>
         <td className={tdClassName}>
-          <button onClick={handleDeletePhone(id)}>DELETE</button>
+          <button className="text-red-600" onClick={handleDeletePhone(id)}>DELETE</button>
         </td>
       </tr>
     )
