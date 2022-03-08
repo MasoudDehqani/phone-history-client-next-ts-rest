@@ -4,7 +4,7 @@ import { PhoneType } from '~utils/types'
 import Phones from '../../src/components/Phones'
 import { handlePhonesServerSideRequests } from '../../src/utils/handleServerSideRequest'
 
-export default function PriceRange({ phones } : { phones: PhoneType[] }) {
+export default function Phone({ phones } : { phones: PhoneType[] }) {
 
   const router = useRouter()
   

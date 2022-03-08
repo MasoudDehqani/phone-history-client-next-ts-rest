@@ -1,36 +1,60 @@
 import type { PhoneType } from '../../utils/types'
 
+type PriceRangeType = 1 | 2 | 3 | 4 | 5 
 
 export enum PhoneStateActions {
   DELETE = "DELETE",
-  ADD = "ADD"
+  ADD = "ADD",
+  FILL = "FILL"
 }
 
-interface AddActionType {
+interface AddPayloadType {
+  id: string,
+  brand: string,
+  model: string,
+  price_range: PriceRangeType
+}
+
+interface DeletePayloadType {
+  id: string,
+}
+
+type FillPayloadType = {
+  id: string,
+  brand: string,
+  model: string,
+  price_range: PriceRangeType
+}[]
+
+
+interface ActionType {
   type: PhoneStateActions,
   payload: {
-    id: string
+    dataToAdd?: AddPayloadType,
+    idToDelete?: DeletePayloadType,
+    arrayToFill?: FillPayloadType
   }
 }
 
-interface DeleteActionType {
-  type: PhoneStateActions,
-  payload:  {
-    brand: string,
-    model: string,
-    priceRange: 1 | 2 | 3 | 4 | 5
-  }
-}
-
-type ActionType = AddActionType & DeleteActionType
 
 export default function phoneReducer(state: PhoneType[], action: ActionType): PhoneType[] {
   switch (action.type) {
-    case "ADD": {
-      return [...state, { id: action.payload.id, brand: action.payload.brand, model: action.payload.model, price_range: action.payload.priceRange }]
+    case PhoneStateActions.ADD: {
+      if (action.payload.dataToAdd) {
+        const { id, brand, model, price_range } = action.payload.dataToAdd;
+        return [...state, { id, brand, model, price_range }]
+      }
+      return []
     };
-    case "DELETE": {
-      return state.filter(({ id }) => id !== action.payload.id)
+    case PhoneStateActions.DELETE: {
+      return state.filter(({ id }) => {
+        if (action.payload.idToDelete) return id !== action.payload.idToDelete.id
+        return false
+      })
+    };
+    case PhoneStateActions.FILL: {
+      if (action.payload.arrayToFill) return action.payload.arrayToFill
+      return []
     };
     default: {
       return []

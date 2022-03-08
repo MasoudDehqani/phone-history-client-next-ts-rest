@@ -3,7 +3,7 @@ import phoneReducer from "~components/Reducers/phoneReducer";
 import { PhoneType } from "~utils/types";
 
 const contextDefaultValue = { phonesData: [], dispatch: () => {} }
-export const PhoneDataContext = createContext<{ phonesData: PhoneType[], dispatch: Dispatch<any> }>(contextDefaultValue)
+export const PhonesDataContext = createContext<{ phonesData: PhoneType[], dispatch: Dispatch<any> }>(contextDefaultValue)
 
 // export default function MainDataContextProvider({ children } : { children: ReactNode }) {
 //   const [phonesData, dispatch] = useReducer(phoneReducer, [])

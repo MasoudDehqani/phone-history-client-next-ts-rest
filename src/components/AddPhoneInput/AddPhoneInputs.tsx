@@ -1,10 +1,13 @@
 import { Dispatch, useState } from "react";
 import useInputValues from "~components/Hooks/useInputValues";
+import usePhoneContext from "~components/Hooks/usePhoneContext";
 import { handleAddPhone } from "~utils/handleClientSideRequests";
 
-export default function AddPhoneInputs({ dispatch } : { dispatch: Dispatch<any> }) {
+export default function AddPhoneInputs() {
 
   const { inputValues: { brand, model, priceRange }, setInputValues } = useInputValues("", "")
+
+  const { dispatch } = usePhoneContext()
 
   const handleInputValues = (inputId: string, newInputValue: string | number) => {
     setInputValues(prevState => ({ ...prevState, [inputId]: newInputValue }))

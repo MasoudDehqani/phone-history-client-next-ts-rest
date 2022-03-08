@@ -1,13 +1,16 @@
 import Link from "next/link"
 import { Dispatch, useContext, useEffect } from "react"
 import usePhoneContext from "~components/Hooks/usePhoneContext"
+import { PhoneStateActions } from "~components/Reducers/phoneReducer"
 import type { PhoneType } from "~utils/types"
 
-export default function Table({ phones, dispatch } : { phones: PhoneType[], dispatch: Dispatch<any> }) {
+export default function Table() {
 
-  // handleAddPhone = () => {
+  const { phonesData, dispatch } = usePhoneContext()
 
-  // }
+  // useEffect(() => {
+  //   dispatch({ type: PhoneStateActions.FILL, payload: phonesData })
+  // }, [dispatch, phonesData])
 
   const handleDeletePhone = (id: string) => {
     return async () => {
@@ -29,7 +32,7 @@ export default function Table({ phones, dispatch } : { phones: PhoneType[], disp
     }
   }
 
-  const mapPhonesToTableRows = ({ id, brand, model, price_range } : PhoneType) => {
+  const mapPhonesToTableRows = ({ id, brand, model, price_range: priceRange } : PhoneType) => {
 
     const tdClassName = "border text-center px-8 py-4"
     const priceRangeSymbol = "$"
@@ -42,13 +45,18 @@ export default function Table({ phones, dispatch } : { phones: PhoneType[], disp
           </Link>
         </td>
         <td className={tdClassName}>
-          <Link href={`/phones/${model}`}>
+          <Link href={`/phone-models/${model}`}>
             <a>{model}</a>
           </Link>
         </td>
         <td className={tdClassName}>
-          <Link href={`/price-ranges/${price_range}`}>
-            <a>{priceRangeSymbol.repeat(price_range)}</a>
+          <Link href={`/price-ranges/${priceRange}`}>
+            <a>{priceRangeSymbol.repeat(priceRange)}</a>
+          </Link>
+        </td>
+        <td className={tdClassName}>
+          <Link href={`/phone-reviews/${id}`}>
+            <a>Review</a>
           </Link>
         </td>
         <td className={tdClassName}>
@@ -69,7 +77,7 @@ export default function Table({ phones, dispatch } : { phones: PhoneType[], disp
           </tr>
         </thead>
         <tbody>
-          {phones.map(mapPhonesToTableRows)}
+          {phonesData.map(mapPhonesToTableRows)}
         </tbody>
       </table>
     </div>

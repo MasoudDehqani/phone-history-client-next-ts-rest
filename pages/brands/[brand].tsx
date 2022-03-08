@@ -1,11 +1,13 @@
-import App from '../../src/components/App'
+import Phones from '../../src/components/Phones'
 import { PhoneType } from '~utils/types'
-export { getServerSideProps } from '../../src/utils/handleServerSideRequest'
+import { handlePhonesServerSideRequests } from '../../src/utils/handleServerSideRequest'
 
-export default function Brand({ data } : { data: PhoneType[] }) {
+export default function Brand({ phones } : { phones: PhoneType[] }) {
   return (
     <div>
-      <App data={data} />
+      <Phones data={phones} />
     </div>
   )
 }
+
+export const getServerSideProps = handlePhonesServerSideRequests()
