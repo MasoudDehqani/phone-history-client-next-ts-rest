@@ -25,6 +25,14 @@ export type ReviewType = {
   review_text: string
 }
 
+export interface PhoneReviewType {
+  brand: string,
+  model: string,
+  review_id: string,
+  rate: number,
+  review_text: string
+}
+
 export enum CrudMethods {
   GET = "GET",
   POST = "POST",

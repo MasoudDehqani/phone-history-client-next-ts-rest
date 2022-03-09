@@ -5,7 +5,11 @@ import { handleAddPhone } from "~utils/handleClientSideRequests";
 
 export default function AddPhoneInputs() {
 
-  const { inputValues: { brand, model, priceRange }, setInputValues } = useInputValues("", "")
+  const { inputValues: { brand, model, priceRange }, setInputValues } = useInputValues({
+    brand: "",
+    model: "",
+    priceRange: 1
+  })
 
   const { dispatch } = usePhoneContext()
 

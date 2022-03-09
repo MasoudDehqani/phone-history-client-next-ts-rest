@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
-export default function useInputValues(inputId: string, newInputValue: string) {
-  const [inputValues, setInputValues] = useState({
-    brand: "",
-    model: "",
-    priceRange: 1
-  })
+export default function useInputValues(initialValue: { [key: string]: any }) {
+  const [inputValues, setInputValues] = useState(initialValue)
 
-  return { inputValues, setInputValues }
+  const handleInputValues = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
+    const { id, value } = event.target;
+    setInputValues(prevState => ({
+      ...prevState,
+      [id]: value
+    }))
+  }
+
+  return { inputValues, handleInputValues }
 }

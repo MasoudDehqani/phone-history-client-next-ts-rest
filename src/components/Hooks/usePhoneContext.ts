@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { PhonesDataContext } from "~components/Context/PhonesDataContext";
+import PhonesContext from "~components/Context/PhonesContext";
 
 export default function usePhoneContext() {
-  return useContext(PhonesDataContext)
+  return useContext(PhonesContext)
 }
