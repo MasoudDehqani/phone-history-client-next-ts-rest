@@ -23,7 +23,8 @@ type FillPayloadType = {
   id: string,
   brand: string,
   model: string,
-  price_range: PriceRangeType
+  price_range: PriceRangeType,
+  avg_rate: number | null
 }[]
 
 
@@ -42,7 +43,7 @@ export default function phoneReducer(state: PhoneType[], action: ActionType): Ph
     case PhoneStateActions.ADD: {
       if (action.payload.dataToAdd) {
         const { id, brand, model, price_range } = action.payload.dataToAdd;
-        return [...state, { id, brand, model, price_range }]
+        return [...state, { id, brand, model, price_range, avg_rate: null }]
       }
       return []
     };

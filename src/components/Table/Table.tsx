@@ -26,17 +26,18 @@ export default function Table() {
         })
   
         const data = await response.json()
-        dispatch({ type: "DELETE", payload: { id } })
+        dispatch({ type: PhoneStateActions.DELETE, payload: { idToDelete: { id } } })
       } catch(err) {
         console.log(err)
       }
     }
   }
 
-  const mapPhonesToTableRows = ({ id, brand, model, price_range: priceRange } : PhoneType) => {
+  const mapPhonesToTableRows = ({ id, brand, model, price_range: priceRange, avg_rate: avgRate, reviews_count } : PhoneType) => {
 
     const tdClassName = "border text-center px-8 py-4"
     const priceRangeSymbol = "$"
+    const ratingPercent = (Number(avgRate) * 100) / 5;
 
     return (
       <tr key={id}>
@@ -56,15 +57,18 @@ export default function Table() {
           </Link>
         </td>
         <td className={tdClassName}>
-          <Link href={`/phone-reviews/${id}`}>
+          <Link href={{ pathname: `/phone-reviews/${id}` }}>
             <a>
-              <div className="text-gray-400 text-xl relative m-0 p-0" style={{ unicodeBidi: "bidi-override" }}>
-                <div className={ratingStyles["fill-ratings"]} style={{ width: "68%" }}>
-                  <span className={ratingStyles["rating-stars"]}>★★★★★</span>
+              <div className="flex w-full items-center">
+                <div className="text-gray-400 text-xl relative m-0 p-0" style={{ unicodeBidi: "bidi-override" }}>
+                  <div className={ratingStyles["fill-ratings"]} style={{ width: `${ratingPercent}%` }}>
+                    <span className={ratingStyles["rating-stars"]}>★★★★★</span>
+                  </div>
+                  <div className={ratingStyles["empty-ratings"]}>
+                    <span>★★★★★</span>
+                  </div>
                 </div>
-                <div className={ratingStyles["empty-ratings"]}>
-                  <span>★★★★★</span>
-                </div>
+                <span className="ml-1 text-sm text-gray-600">({avgRate || 0} / {reviews_count})</span>
               </div>
             </a>
           </Link>

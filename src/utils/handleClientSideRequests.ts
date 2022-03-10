@@ -1,4 +1,5 @@
 import { Dispatch } from "react"
+import { PhoneStateActions } from "~components/Reducers/phoneReducer"
 
 export default function handleClientSideRequests() {
 
@@ -22,6 +23,6 @@ export const handleAddPhone = (brand: string, model: string, priceRange: number,
   
     const { data: { id } } = await response.json()
   
-    dispatch({ type: "ADD", payload: { id, brand, model, priceRange } })
+    dispatch({ type: PhoneStateActions.ADD, payload: { dataToAdd: { id, brand, model, price_range: +priceRange } } })
   }
 }

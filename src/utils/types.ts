@@ -16,7 +16,9 @@ export type PhoneType = {
   id: string,
   brand: string,
   model: string,
-  price_range: 1 | 2 | 3 | 4 | 5 
+  price_range: 1 | 2 | 3 | 4 | 5,
+  avg_rate: number | null,
+  reviews_count: number
 }
 
 export type ReviewType = {
@@ -31,6 +33,13 @@ export interface PhoneReviewType {
   review_id: string,
   rate: number,
   review_text: string
+}
+
+export interface PhoneReviewDataType {
+  brand: string,
+  model: string,
+  noReview: boolean,
+  reviews: PhoneReviewType[]
 }
 
 export enum CrudMethods {

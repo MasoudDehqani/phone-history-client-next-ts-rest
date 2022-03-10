@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import Reviews from '~components/Reviews'
 import { handleReviewsServerSideRequests } from "~utils/handleServerSideRequest"
-import { PhoneReviewType, ReviewType } from '~utils/types'
+import { PhoneReviewDataType, PhoneReviewType, ReviewType } from '~utils/types'
 import ReviewsContext from '~components/Context/ReviewsContext'
 
-export default function ReviewCategory({ reviews } : { reviews: PhoneReviewType[] }) {
+export default function ReviewCategory({ data } : { data: PhoneReviewDataType }) {
 
   const router = useRouter()
   const refreshReviews = () => {
@@ -13,7 +13,7 @@ export default function ReviewCategory({ reviews } : { reviews: PhoneReviewType[
   }
   return (
     <ReviewsContext.Provider value={{ refreshReviews }}>
-      <Reviews data={reviews} />
+      <Reviews data={data} />
     </ReviewsContext.Provider>
   )
 }

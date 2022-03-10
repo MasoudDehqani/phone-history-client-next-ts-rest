@@ -37,7 +37,6 @@ export default function AddReviewInput() {
     })
 
     const data = await response.json()
-    console.log(data)
     setReviewId(data.data.id)
     refreshReviews()
   }

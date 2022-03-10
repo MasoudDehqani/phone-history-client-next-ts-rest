@@ -36,11 +36,11 @@ export const handleReviewsServerSideRequests = (): GetServerSideProps => {
   const getServerSideProps: GetServerSideProps = async (ctx) => {
     const queryParam = getQueryParamValue(ctx.params);
     const response: ReviewsDataType = await handleRequest(BaseUrls.ReviewsBaseUrl, queryParam);
-    const { data: { reviews } } = response;
+    const { data } = response;
     
     return {
       props: {
-        reviews
+        data
       }
     }
   }
