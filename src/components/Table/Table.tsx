@@ -3,6 +3,7 @@ import { Dispatch, useContext, useEffect } from "react"
 import usePhoneContext from "~components/Hooks/usePhoneContext"
 import { PhoneStateActions } from "~components/Reducers/phoneReducer"
 import type { PhoneType } from "~utils/types"
+import ratingStyles from "../../../styles/rating.module.css"
 
 export default function Table() {
 
@@ -56,7 +57,16 @@ export default function Table() {
         </td>
         <td className={tdClassName}>
           <Link href={`/phone-reviews/${id}`}>
-            <a>Review</a>
+            <a>
+              <div className="text-gray-400 text-xl relative m-0 p-0" style={{ unicodeBidi: "bidi-override" }}>
+                <div className={ratingStyles["fill-ratings"]} style={{ width: "68%" }}>
+                  <span className={ratingStyles["rating-stars"]}>★★★★★</span>
+                </div>
+                <div className={ratingStyles["empty-ratings"]}>
+                  <span>★★★★★</span>
+                </div>
+              </div>
+            </a>
           </Link>
         </td>
         <td className={tdClassName}>
