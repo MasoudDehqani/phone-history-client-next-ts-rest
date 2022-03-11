@@ -7,7 +7,7 @@ export default function useInputValues(initialValue: { [key: string]: any }) {
     const { id, value } = event.target;
     setInputValues(prevState => ({
       ...prevState,
-      [id]: value
+      [id]: value.trimStart().replace(/\s\s+/g, ' ')
     }))
   }
 

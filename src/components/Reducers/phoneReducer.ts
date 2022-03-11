@@ -12,7 +12,8 @@ interface AddPayloadType {
   id: string,
   brand: string,
   model: string,
-  price_range: PriceRangeType
+  price_range: PriceRangeType,
+  reviews_count: number
 }
 
 interface DeletePayloadType {
@@ -24,7 +25,8 @@ type FillPayloadType = {
   brand: string,
   model: string,
   price_range: PriceRangeType,
-  avg_rate: number | null
+  avg_rate: number | null,
+  reviews_count: number
 }[]
 
 
@@ -42,8 +44,8 @@ export default function phoneReducer(state: PhoneType[], action: ActionType): Ph
   switch (action.type) {
     case PhoneStateActions.ADD: {
       if (action.payload.dataToAdd) {
-        const { id, brand, model, price_range } = action.payload.dataToAdd;
-        return [...state, { id, brand, model, price_range, avg_rate: null }]
+        const { id, brand, model, price_range, reviews_count } = action.payload.dataToAdd;
+        return [...state, { id, brand, model, price_range, avg_rate: null, reviews_count }]
       }
       return []
     };
