@@ -13,12 +13,12 @@ export default function Table() {
   //   dispatch({ type: PhoneStateActions.FILL, payload: phonesData })
   // }, [dispatch, phonesData])
 
-  const handleDeletePhone = (id: string) => {
+  const handleDeletePhone = (phoneId: string) => {
     return async () => {
       try {
         const response = await fetch('http://localhost:5001/api/v1/phones', {
           method: "DELETE",
-          body: JSON.stringify({ id }),
+          body: JSON.stringify({ phoneId }),
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -26,21 +26,21 @@ export default function Table() {
         })
   
         const data = await response.json()
-        dispatch({ type: PhoneStateActions.DELETE, payload: { idToDelete: { id } } })
+        dispatch({ type: PhoneStateActions.DELETE, payload: { idToDelete: { phoneId } } })
       } catch(err) {
         console.log(err)
       }
     }
   }
 
-  const mapPhonesToTableRows = ({ id, brand, model, price_range: priceRange, avg_rate: avgRate, reviews_count } : PhoneType) => {
+  const mapPhonesToTableRows = ({ phoneId, brand, model, priceRange: priceRange, avgRate: avgRate, reviewsCount } : PhoneType) => {
 
     const tdClassName = "border text-center px-8 py-4"
     const priceRangeSymbol = "$"
     const ratingPercent = (Number(avgRate) * 100) / 5;
 
     return (
-      <tr key={id}>
+      <tr key={phoneId}>
         <td className={tdClassName}>
           <Link href={`/brands/${brand}`}>
             <a>{brand}</a>
@@ -57,7 +57,7 @@ export default function Table() {
           </Link>
         </td>
         <td className={tdClassName}>
-          <Link href={{ pathname: `/phone-reviews/${id}` }}>
+          <Link href={{ pathname: `/phone-reviews/${phoneId}` }}>
             <a>
               <div className="flex w-full items-center">
                 <div className="text-gray-400 text-xl relative m-0 p-0" style={{ unicodeBidi: "bidi-override" }}>
@@ -68,13 +68,13 @@ export default function Table() {
                     <span>★★★★★</span>
                   </div>
                 </div>
-                <span className="ml-1 text-sm text-gray-600">({avgRate || 0} / {reviews_count})</span>
+                <span className="ml-1 text-sm text-gray-600">({avgRate || 0} / {reviewsCount})</span>
               </div>
             </a>
           </Link>
         </td>
         <td className={tdClassName}>
-          <button className="text-red-600" onClick={handleDeletePhone(id)}>DELETE</button>
+          <button className="text-red-600" onClick={handleDeletePhone(phoneId)}>DELETE</button>
         </td>
       </tr>
     )

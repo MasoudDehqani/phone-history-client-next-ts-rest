@@ -9,22 +9,27 @@ export default function handleClientSideRequests() {
 export const handleAddPhone = (brand: string, model: string, priceRange: number, dispatch: Dispatch<any>) => {
   const trimmedBrand = brand.trimEnd();
   const trimmedModel = model.trimEnd();
+  const body = {
+    brand: trimmedBrand,
+    model: trimmedModel,
+    priceRange: +priceRange
+  }
   return async () => {
     const response = await fetch("http://localhost:5001/api/v1/phones", {
       method: "POST",
-      body: JSON.stringify({
-        trimmedBrand,
-        trimmedModel,
-        priceRange
-      }),
+      body: JSON.stringify(body),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
     })
   
-    const { data: { id } } = await response.json()
+    const { data } = await response.json()
+    const { phoneId } = data;
+    const payloadData = {
+      phoneId, ...body
+    }
   
-    dispatch({ type: PhoneStateActions.ADD, payload: { dataToAdd: { id, trimmedBrand, trimmedModel, price_range: +priceRange } } })
+    dispatch({ type: PhoneStateActions.ADD, payload: { dataToAdd: payloadData } })
   }
 }

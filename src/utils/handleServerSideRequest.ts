@@ -11,9 +11,13 @@ const getQueryParamValue = (params: ParsedUrlQuery | undefined): string => {
 }
 
 const handleRequest = async (url: string, param: string) => {
-  const responsePromise = await fetch(`${url}${param}`);
-  const response = responsePromise.json()
-  return response;
+  try {
+    const responsePromise = await fetch(`${url}${param}`, {  });
+    const response = responsePromise.json()
+    return response;
+  } catch(err) {
+    console.log(err)
+  }
 }
 
 export const handlePhonesServerSideRequests = (): GetServerSideProps => {

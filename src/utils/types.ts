@@ -13,26 +13,26 @@ export type ReviewsDataType = {
 }
 
 export type PhoneType = {
-  id: string,
+  phoneId: string,
   brand: string,
   model: string,
-  price_range: 1 | 2 | 3 | 4 | 5,
-  avg_rate: number | null,
-  reviews_count: number
+  priceRange: 1 | 2 | 3 | 4 | 5,
+  avgRate: number | null,
+  reviewsCount: number
 }
 
 export type ReviewType = {
-  review_id: string,
+  reviewId: string,
   rate: number,
-  review_text: string
+  reviewText: string
 }
 
 export interface PhoneReviewType {
   brand: string,
   model: string,
-  review_id: string,
+  reviewId: string,
   rate: number,
-  review_text: string
+  reviewText: string
 }
 
 export interface PhoneReviewDataType {

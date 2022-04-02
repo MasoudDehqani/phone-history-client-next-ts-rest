@@ -13,11 +13,11 @@ export default function Reviews({ data } : { data: PhoneReviewDataType }) {
   const avgRate = (reviews.reduce(sum, 0) / reviews.length).toFixed(1)
   console.log(reviews)
 
-  const reviewsElements = reviews.map(({ rate, review_text, review_id }) =>
-    <div className="m-5 bg-blue-500 p-3 shadow-lg rounded-md" key={review_id}>
+  const reviewsElements = reviews.map(({ rate, reviewText, reviewId }) =>
+    <div className="m-5 bg-blue-500 p-3 shadow-lg rounded-md" key={reviewId}>
       {/* <h2 className="font-bold">{`${brand} ${model}`}</h2> */}
       <span>Rate: {rate}</span>
-      <p>{review_text}</p>
+      <p>{reviewText}</p>
     </div> 
   )
 
