@@ -31,7 +31,7 @@ export interface PhoneReviewType {
   brand: string,
   model: string,
   reviewId: string,
-  rate: number,
+  reviewRate: number,
   reviewText: string
 }
 

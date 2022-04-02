@@ -8,20 +8,18 @@ import useReviewsContext from "./Hooks/useReviewsContext";
 export default function Reviews({ data } : { data: PhoneReviewDataType }) {
   
   // const [reviews, setReviews] = useState<PhoneReviewType[]>(data)
-  const sum = (f: number, s: PhoneReviewType): number => f + +s.rate;
+  const sum = (f: number, s: PhoneReviewType): number => f + +s.reviewRate;
   const { brand, model, noReview, reviews } = data;
   const avgRate = (reviews.reduce(sum, 0) / reviews.length).toFixed(1)
-  console.log(reviews)
+  console.log(data)
 
-  const reviewsElements = reviews.map(({ rate, reviewText, reviewId }) =>
+  const reviewsElements = reviews.map(({ reviewRate, reviewText, reviewId }) =>
     <div className="m-5 bg-blue-500 p-3 shadow-lg rounded-md" key={reviewId}>
       {/* <h2 className="font-bold">{`${brand} ${model}`}</h2> */}
-      <span>Rate: {rate}</span>
+      <span>Rate: {reviewRate}</span>
       <p>{reviewText}</p>
     </div> 
   )
-
-  console.log(noReview)
     
   return (
     <div>

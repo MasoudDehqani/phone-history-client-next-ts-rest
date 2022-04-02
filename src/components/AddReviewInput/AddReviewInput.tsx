@@ -22,9 +22,9 @@ export default function AddReviewInput() {
 
   const handleAddReview = async () => {
     const body = {
-      id: "",
-      rate: rateInput,
-      review_text: reviewInput
+      reviewId: "",
+      reviewRate: rateInput,
+      reviewText: reviewInput
     }
     
     const response = await fetch(`${BaseUrls.ReviewsBaseUrl}${router.query.reviewCategory}`, {
